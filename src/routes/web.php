@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
-use Illuminate\Support\Facades\Response;
 
-/* NOTE: Do Not Remove
-/ Livewire asset handling if using sub folder in domain
+/*
+|--------------------------------------------------------------------------
+| Livewire asset handling
+|--------------------------------------------------------------------------
 */
 
 Livewire::setUpdateRoute(function ($handle) {
@@ -15,9 +18,18 @@ Livewire::setUpdateRoute(function ($handle) {
 Livewire::setScriptRoute(function ($handle) {
     return Route::get(config('app.asset_prefix') . '/livewire/livewire.js', $handle);
 });
+
 /*
-/ END
+|--------------------------------------------------------------------------
+| Frontend Portfolio Routes
+|--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [PortfolioController::class, 'index'])
+    ->name('home');
+
+Route::get('/projects/{project:slug}', [PortfolioController::class, 'show'])
+    ->name('projects.show');
+
+Route::post('/contact', [ContactController::class, 'store'])
+    ->name('contact.store');
