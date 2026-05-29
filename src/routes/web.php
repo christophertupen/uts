@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 
@@ -33,3 +34,15 @@ Route::get('/projects/{project:slug}', [PortfolioController::class, 'show'])
 
 Route::post('/contact', [ContactController::class, 'store'])
     ->name('contact.store');
+
+/*
+|--------------------------------------------------------------------------
+| Profile Routes (API)
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/profile/update-photo', [ProfileController::class, 'updatePhoto'])
+    ->name('profile.update-photo');
+
+Route::post('/api/profile/update', [ProfileController::class, 'update'])
+    ->name('profile.update');

@@ -60,6 +60,13 @@ class ProjectResource extends Resource
                     ])
                     ->default('ongoing')
                     ->required(),
+
+                Forms\Components\TextInput::make('progress_percent')
+                    ->label('Progress Laporan (%)')
+                    ->numeric()
+                    ->minValue(0)
+                    ->maxValue(100)
+                    ->default(0),
             ]);
     }
 
@@ -76,6 +83,10 @@ class ProjectResource extends Resource
 
                 Tables\Columns\TextColumn::make('status')
                     ->badge(),
+
+                Tables\Columns\TextColumn::make('progress_percent')
+                    ->label('Progress (%)')
+                    ->suffix('%'),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d M Y')

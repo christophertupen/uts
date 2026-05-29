@@ -14,5 +14,7 @@ class Project extends Model
         'github_url',
         'demo_url',
         'status',
+        'progress_percent',
+        'report_file',
     ];
 }
